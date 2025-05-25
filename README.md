@@ -53,4 +53,4 @@ npm start
 
 ## Лицензия
 
-MIT 
+MIT
