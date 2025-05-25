@@ -1,0 +1,69 @@
+.graph-plotter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 16px;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+  min-height: 600px;
+}
+
+.controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 6px;
+  position: sticky;
+  top: 0;
+}
+
+.graph-container {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: 100%;
+  min-height: 600px;
+  transition: var(--transition);
+  border: 1px solid var(--gray-light);
+}
+
+.graph-container:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+  }
+  
+  .controls-panel {
+    position: relative;
+    height: auto;
+    max-height: none;
+  }
+  
+  .graph-container {
+    height: 500px;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    gap: 10px;
+  }
+} 

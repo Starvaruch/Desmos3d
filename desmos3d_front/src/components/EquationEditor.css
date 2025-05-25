@@ -1,0 +1,299 @@
+.equation-editor {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-light);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.editor-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}
+
+.add-equation-btn {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.add-equation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.add-equation-btn:before {
+  content: "+";
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.equations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: visible;
+  padding-right: 5px;
+}
+
+.equations-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.equations-list::-webkit-scrollbar-track {
+  background: var(--gray-light);
+  border-radius: 10px;
+}
+
+.equations-list::-webkit-scrollbar-thumb {
+  background: var(--gray);
+  border-radius: 10px;
+}
+
+.equation-item {
+  background-color: var(--light);
+  border-radius: var(--radius);
+  padding: 12px;
+  border: 1.5px solid var(--gray-light);
+  transition: var(--transition);
+}
+
+.equation-item:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.equation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.equation-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin: 0;
+}
+
+.equation-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.visibility-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.1rem;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.visibility-toggle:hover {
+  background-color: var(--gray-light);
+  color: var(--primary);
+}
+
+.visibility-toggle.visible {
+  color: var(--primary);
+}
+
+.visibility-toggle.visible:before {
+  content: "👁️";
+}
+
+.visibility-toggle.hidden:before {
+  content: "👁️‍🗨️";
+}
+
+.remove-equation-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.1rem;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.remove-equation-btn:hover {
+  background-color: rgba(247, 37, 133, 0.1);
+  color: var(--danger);
+}
+
+.remove-equation-btn:before {
+  content: "×";
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.equation-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.equation-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  transition: var(--transition);
+  background-color: white;
+}
+
+.equation-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.equation-input.error {
+  border-color: var(--danger);
+  background-color: rgba(247, 37, 133, 0.05);
+}
+
+.color-picker {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.color-picker:hover {
+  transform: scale(1.1);
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-text:before {
+  content: "⚠️";
+  font-size: 0.9rem;
+}
+
+.no-equations {
+  color: #888;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.equation-item.has-error {
+  border-color: var(--error-color);
+}
+
+.equation-color {
+  margin-right: 10px;
+}
+
+.equation-color input {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.equation-expression {
+  flex: 1;
+}
+
+.equation-expression input {
+  width: 100%;
+  background-color: white;
+}
+
+.equation-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.expand-button,
+.remove-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.expand-button:hover,
+.remove-button:hover {
+  color: var(--primary-color);
+}
+
+.remove-button:hover {
+  color: var(--error-color);
+}
+
+.equation-details {
+  padding: 10px;
+  background-color: #f5f7fa;
+  border-top: 1px solid var(--border-color);
+}
+
+.equation-hint {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.equation-hint p {
+  margin: 5px 0;
+}
+
+.equation-error {
+  padding: 8px;
+  color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.1);
+  font-size: 0.9rem;
+} 
