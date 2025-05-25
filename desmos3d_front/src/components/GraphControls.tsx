@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GraphConfig } from '../types';
 import './GraphControls.css';
 
