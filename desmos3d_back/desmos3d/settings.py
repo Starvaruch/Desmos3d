@@ -143,8 +143,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True  # For development; restrict in production
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = not DEBUG  # Only allow all origins in production
+CORS_ALLOW_CREDENTIALS = not DEBUG
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -165,19 +165,22 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# CSRF settings
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5173',  # Vite dev server
-    'http://127.0.0.1:5173',
-    'http://localhost:3000',  # React dev server
-    'http://127.0.0.1:3000',
-]
-
-CSRF_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_HTTPONLY = False  # Required for JavaScript access
-CSRF_USE_SESSIONS = False
-CSRF_COOKIE_NAME = 'csrftoken'
+# CSRF settings - only enable in production
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:5173',  # Vite dev server
+        'http://127.0.0.1:5173',
+        'http://localhost:3000',  # React dev server
+        'http://127.0.0.1:3000',
+    ]
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_HTTPONLY = False
+    CSRF_USE_SESSIONS = False
+    CSRF_COOKIE_NAME = 'csrftoken'
+else:
+    # Disable CSRF in development
+    MIDDLEWARE.remove('django.middleware.csrf.CsrfViewMiddleware')
 
 # REST Framework settings
 REST_FRAMEWORK = {
