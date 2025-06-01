@@ -12,6 +12,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Important for CSRF
 });
 
 // Request interceptor to add auth token to every request
@@ -20,6 +21,15 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Token ${token}`;
+    }
+    
+    // Get CSRF token from cookie
+    const csrfToken = document.cookie.split('; ')
+      .find(row => row.startsWith('csrftoken='))
+      ?.split('=')[1];
+    
+    if (csrfToken) {
+      config.headers['X-CSRFToken'] = csrfToken;
     }
     
     // Log request for debugging
