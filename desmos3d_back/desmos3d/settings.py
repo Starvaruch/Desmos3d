@@ -143,8 +143,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = not DEBUG  # Only allow all origins in production
-CORS_ALLOW_CREDENTIALS = not DEBUG
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only allow all origins in production
+CORS_ALLOW_CREDENTIALS = DEBUG
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
