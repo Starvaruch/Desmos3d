@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// API base URL - change this to match your backend URL in production
-export const API_BASE_URL = 'http://127.0.0.1:8000/api';
+// API base URL - use environment variable in production, fallback to localhost for development
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
-// Debug API requests by logging them
-const logRequests = true;
+// Debug API requests by logging them - disable in production
+const logRequests = import.meta.env.DEV;
 
 // Create axios instance with default config
 const api = axios.create({
