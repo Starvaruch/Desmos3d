@@ -22,6 +22,7 @@ from drf_yasg import openapi
 from api.views import register_user, login_user, test_auth_endpoint
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -48,5 +49,5 @@ urlpatterns = [
     path('api/auth/register-direct/', register_user, name='direct-register'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()
