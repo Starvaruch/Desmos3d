@@ -149,12 +149,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if DEVELOPMENT_MODE:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_URL = '/media/'
 else:
     STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'desmos3d.cdn.backends.StaticRootS3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'desmos3d.cdn.backends.MediaRootS3Boto3Storage'
 # Default primary key field type
