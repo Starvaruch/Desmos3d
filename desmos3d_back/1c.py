@@ -211,6 +211,7 @@ def update_excel_data(new_data, file_path="stock_metrics_by_year.xlsx"):
                 display_metric = metrics_with_units.get(metric, metric)
                 row = {"Показатель": display_metric}
                 numeric_values = []  # Список для хранения числовых значений
+                numeric_values_no_vk = []  # Список для хранения числовых значений без ВК
                 
                 # Добавляем значение для каждой компании
                 for company_data in valid_data:
@@ -238,6 +239,8 @@ def update_excel_data(new_data, file_path="stock_metrics_by_year.xlsx"):
                             numeric_value = float(value)
                             value = numeric_value  # Используем числовое значение
                             numeric_values.append(numeric_value)  # Добавляем в список для расчета среднего
+                            if company_name != "ВК":  # Добавляем в список для расчета среднего без ВК
+                                numeric_values_no_vk.append(numeric_value)
                         except (ValueError, TypeError):
                             pass
                     
@@ -249,6 +252,13 @@ def update_excel_data(new_data, file_path="stock_metrics_by_year.xlsx"):
                     row["Среднее"] = avg_value
                 else:
                     row["Среднее"] = "Н/Д"
+                
+                # Рассчитываем среднее значение без ВК
+                if numeric_values_no_vk:
+                    avg_value_no_vk = sum(numeric_values_no_vk) / len(numeric_values_no_vk)
+                    row["Среднее без ВК"] = avg_value_no_vk
+                else:
+                    row["Среднее без ВК"] = "Н/Д"
                 
                 year_data.append(row)
             
@@ -269,11 +279,11 @@ def update_excel_data(new_data, file_path="stock_metrics_by_year.xlsx"):
                     
                     # Формат для ячеек средних значений
                     if metric in ["P/E", "EV/EBITDA", "P/S", "P/BV"]:
-                        worksheet.set_column(company_count + 1, company_count + 1, 12, number_format)
+                        worksheet.set_column(company_count + 1, company_count + 2, 12, number_format)
                     elif metric == "Див. доходность":
-                        worksheet.set_column(company_count + 1, company_count + 1, 12, percent_format)
+                        worksheet.set_column(company_count + 1, company_count + 2, 12, percent_format)
                     else:
-                        worksheet.set_column(company_count + 1, company_count + 1, 12, number_format)
+                        worksheet.set_column(company_count + 1, company_count + 2, 12, number_format)
     
     return f"Создан файл с данными, размерностями показателей и расчетом средних значений"
 
